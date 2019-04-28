@@ -98,7 +98,7 @@ Doch alles der Reihe nach. Beginnen wir mit der Exporativen Datenanalyse.
 
 # Explorative Datenanalyse – Lerne den Datensatz kennen
 
-Wir haben in deinem RStudio.cloud Workspace bereits ein sogenanntes Assignment (Template Bike Sharing Demand) hochgeladen. Wenn du jetzt ein neues Projekt innerhalb des Workspaces "Class of '19 | TechAcademy | Data Science with R" erstellst, öffnet sich dein eigener Workspace, in dem wir schon ein paar Vorbereitungen für die erfolgreiche Bearbeitung getroffen haben. So sind einerseit schon die benötigten Datensätze in deinem Working Directory abgelegt. Außerdem haben wir eine RMarkdown Datei erstellt, in der du strukturiert deine Aufgaben coden und letztendlich berichten kannst.
+Wir haben in deinem RStudio.cloud Workspace bereits ein sogenanntes Assignment (Template Bike Sharing Demand) hochgeladen. Wenn du jetzt ein neues Projekt innerhalb des Workspaces "Class of '19 | TechAcademy | Data Science with R" erstellst, öffnet sich dein eigener Workspace, in dem wir schon ein paar Vorbereitungen für die erfolgreiche Bearbeitung getroffen haben. So sind einerseit schon die benötigten Datensätze in deinem Working Directory abgelegt. Außerdem haben wir eine RMarkdown Datei erstellt, in der du strukturiert deine Aufgaben coden und letztendlich berichten kannst. Öffne also als ersten Schritt die Datei "PDF_Bike_Share_Demand.Rmd".
 
 ## 1. Plot des Ausleihverhaltens über die Zeit (train data set)
 Importiere den Datensatz in deinen Workspace. Die Daten sind bereits in deinem Projekt geladen. Da wir später zwischen Test- und Trainings-Datensätzen unterscheiden werden, nennen wir das Objekt, in dem wir den Datensatz speichern $train$.
