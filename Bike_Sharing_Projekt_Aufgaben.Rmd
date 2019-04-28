@@ -1,10 +1,9 @@
 ---
-title:
-- "Data Science mit R – Bike Sharing Demand Projekt-Leitfaden"
-author: 
-- "Lukas Jürgensmeier"
-- "Benjamin Lucht"
-- "Joel Tecle"
+title: "Data Science mit R – Bike Sharing Demand Projekt-Leitfaden"
+author:
+- Lukas Jürgensmeier
+- Benjamin Lucht
+- Joel Tecle
 date: "Sommersemester 2019"
 output:
   pdf_document:
@@ -45,7 +44,7 @@ Herzlich willkommen in dem Projekt-Leitfaden für dein TechAcademy *Data Science
 
 Diese Kurzbeschreibung des Projektes soll dir erste Anhaltspunkte dafür geben, wie du zu einem Ergebnis kommst. Dieses Dokument ist jedoch bewusst keine Schritt-für-Schritt Anleitung, wie du das Projekt durchführen sollst. Uns ist es wichtig, dass du dich in deinem Team selbst mit der Aufgabenstellung beschäftigst und eigene Wege findest, wie du zu einem Ergebnis kommst.  
 
-Da es aber besonders am Anfang nicht ganz offensichtlich sein kann, welche Schritte du durchlaufen sollst, geben wir dir mit diesem Dokument eine kleine Hilfestellung. Es wird sehr oft vorkommen, dass du nicht weiter weißt. Das ist ganz normal und gehört zu dem Lernprozess dazu. Du findest in diesem Dokument Links zu sehr nützlichen Websites, wo Deine Frage vermutlich schon einmal beantwortet wurde. Falls auch googlen dich nicht weiter bringt, stehen dir natürlich die Mentoren per Slack und bei unseren Coding Meetups persönlich zur Verfügung.
+Da es aber besonders am Anfang nicht ganz offensichtlich sein kann, welche Schritte du durchlaufen sollst, geben wir dir mit diesem Dokument eine kleine Hilfestellung. Es wird sehr oft vorkommen, dass du nicht weiter weißt. Das ist ganz normal und gehört zu dem Lernprozess dazu. Du findest in unserem Handout Links zu sehr nützlichen Websites, wo Deine Frage vermutlich schon einmal beantwortet wurde. Falls auch googlen dich nicht weiter bringt, stehen dir natürlich die Mentoren per Slack und bei unseren Coding Meetups persönlich zur Verfügung.
 
 # Bevor es los geht
 ## Um was geht das Projekt?
@@ -56,14 +55,50 @@ Ihr kennt es hier in Frankfurt: In der ganzen Stadt stehen Leihfarräder herum u
 **Explorative Datenanalyse – Lerne den Datensatz kennen**  
 
 Als ersten Schritt werden wir den Datansatz *deskriptiv* kennen lernen. Das heißt, wir nähern uns dem Ziel, indem wir die Daten *beschreiben*. Bei Data Science Projekten ist es sehr wichtig, sich zu aller erst mit dem Datansatz vertraut zu machen. Welche Variablen sind in dem Datensatz enthalten und wie stehen sie im Verhältnis zueinander? Diese Fragen kann man sich sehr gut mit Grafiken beantworten.  
-Wir stellen dir dafür eine Reihe von strukturierten Aufgaben, die du nacheinander bearbeiten wirst. Anfänger, die bisher noch keine oder sehr wenige Statistik-Kenntnisse haben, können an diesem Punkt aufhören. Jedoch wird es gerade danach spannend. Versuche dich also auf jeden Fall trotzdem daran, wenn du noch etwas dazu lernen willst.
+Wir stellen dir dafür eine Reihe von strukturierten Aufgaben, die du nacheinander bearbeiten wirst. Anfänger, die bisher noch keine oder sehr wenige Statistik-Kenntnisse haben, können nach diesen Aufgaben aufhören. Jedoch wird es gerade danach spannend. Versuche dich also auf jeden Fall trotzdem daran, wenn du noch etwas dazu lernen willst.
+
+Für diesen Abschnitt ist es sinnvoll, die ersten DataCamp Kurse in deinem Curriculum absolviert zu haben. Insbesondere folgende Kurse helfen dir weiter bei der Explorativen Datenanalyse:
+
+\begin{itemize}
+\item Introduction to R  \newline
+(https://www.datacamp.com/courses/free-introduction-to-r)
+\item Importing Data in R  \newline
+(https://www.datacamp.com/courses/importing-data-in-r-part-1)
+\item Working with the Rstudio IDE (Part 1)  \newline
+(https://www.datacamp.com/courses/working-with-the-rstudio-ide-part-1)
+\item Data Visualization with ggplot2 (Part 1)  \newline
+(https://www.datacamp.com/courses/data-visualization-with-ggplot2-1)
+\item Data Visualization with ggplot2 (Part 2) (besonders für die Google Maps-Aufgabe)  \newline
+(https://www.datacamp.com/courses/data-visualization-with-ggplot2-2)
+\item Exploratory Data Analysis  \newline
+(https://www.datacamp.com/courses/exploratory-data-analysis)
+\end{itemize}
 
 **Nachfrage-Prognose – Wende statistische Methoden an**  
 
-Dieser Part ist vornehmlich für etwas Fortgeschrittenere Teilnehmer vorgesehen. Wenn du jedoch als Anfänger gut durch den ersten Abschnitt gekommen bist, empfehlen wir dir ausdrücklich, auch diesen Teil zu bearbeiten. Statistische Modelle sind ein enorm wichtiger Teil von Data Science.  
-Nachdem wir den Datensatz kennen gelernt haben, können wir in diesem Schritt ein Modell entwickeln, mit dem wir die Nachfrage nach Leihfahrrädern vorhersagen können. Ziel ist es, deine Vorhersage letztendlich bei Kaggle einzureichen. Kaggle ist eine Plattform von Google, die regelmäßig "Competitions" startet, bei denen es darum geht etwas besonders gut vorherzusagen. Du bekommst einen Trainings-Datensatz mit dem du deine Modelle trainierst. Danach wendest du dein Modell auf einen seperaten Test-Datensatz an. Kaggle überprüft dann die Genauigkeit deiner Vorhersagen und rankt deine Lösung danach.  
+Dieser Part ist vornehmlich für etwas fortgeschrittenere Teilnehmer vorgesehen. Wenn du jedoch als Anfänger gut durch den ersten Abschnitt gekommen bist, empfehlen wir dir ausdrücklich, auch diesen Teil zu bearbeiten. Statistische Modelle sind ein enorm wichtiger Teil des Themenbereiches Data Science.  
+Nachdem wir den Datensatz kennen gelernt haben, können wir in diesem Schritt ein Modell entwickeln, mit dem wir die Nachfrage nach Leihfahrrädern vorhersagen können. Cool, oder? Ziel ist es, deine Vorhersage letztendlich bei Kaggle einzureichen. Kaggle ist eine Plattform von Google, die regelmäßig "Competitions" startet, bei denen es darum geht etwas besonders gut vorherzusagen. Du bekommst einen Trainings-Datensatz mit dem du deine Modelle trainierst. Danach wendest du dein Modell auf einen seperaten Test-Datensatz an. Kaggle überprüft dann die Genauigkeit deiner Vorhersagen und rankt deine Lösung danach.  
+
+Für diesen Abschnitt empfehlen wir dir folgende DataCamp Kurse. Beachte jedoch, dass es noch viele weitere Kurse gibt, die dir eine fortgeschrittenere Lösungsmöglichkeit beibringen.
+
+\begin{itemize}
+\item Correlation and Regression \newline
+(https://www.datacamp.com/courses/correlation-and-regression)
+\item Multiple and Logistic Regression \newline
+(https://www.datacamp.com/courses/multiple-and-logistic-regression)
+\item Supervised Learning in R: Regression \newline  
+(https://www.datacamp.com/courses/supervised-learning-in-r-regression)
+\item Unsupervised Learning in R \newline
+(https://www.datacamp.com/courses/unsupervised-learning-in-r)
+\item Machine Learning Toolbox \newline
+(https://www.datacamp.com/courses/machine-learning-toolbox)
+\end{itemize}
+
+Doch alles der Reihe nach. Beginnen wir mit der Exporativen Datenanalyse.
 
 # Explorative Datenanalyse – Lerne den Datensatz kennen
+
+Wir haben in deinem RStudio.cloud Workspace bereits ein sogenanntes Assignment (Template Bike Sharing Demand) hochgeladen. Wenn du jetzt ein neues Projekt innerhalb des Workspaces "Class of '19 | TechAcademy | Data Science with R" erstellst, öffnet sich dein eigener Workspace, in dem wir schon ein paar Vorbereitungen für die erfolgreiche Bearbeitung getroffen haben. So sind einerseit schon die benötigten Datensätze in deinem Working Directory abgelegt. Außerdem haben wir eine RMarkdown Datei erstellt, in der du strukturiert deine Aufgaben coden und letztendlich berichten kannst.
 
 ## 1. Plot des Ausleihverhaltens über die Zeit (train data set)
 Importiere den Datensatz in deinen Workspace. Die Daten sind bereits in deinem Projekt geladen. Da wir später zwischen Test- und Trainings-Datensätzen unterscheiden werden, nennen wir das Objekt, in dem wir den Datensatz speichern $train$.
@@ -79,19 +114,19 @@ str(train)
 summary(train)
 ```
 
-Bevor du dir überlegen kannst, welche statistischen Methoden für die Vorhersage geeignet sein könnten, ist es immer nützlich sich die Zusammenhänge zwischen den Variablen visuell darzustellen. Diesen Prozess nenn man Exploratory Data Analysis (EDA).
+Bevor du dir überlegen kannst, welche statistischen Methoden für die Vorhersage geeignet sein könnten, ist es immer nützlich sich die Zusammenhänge zwischen den Variablen visuell darzustellen. Diesen Prozess nennt man Exploratory Data Analysis (EDA).
 
 Bevor wir damit starten können, müssen wir den Datensatz zuerst ein wenig bearbeiten, damit die Funktionen diesen verarbeiten können. Das klingt einfacher als gedacht – sehr oft sind die Daten in einem unbrauchbaren Format. In unserem Fall ist die Zeit-Variable $date.time$ als string-Variable gespeichert. Diese müssen wir erst einmal in eine Datums-Variable umwandeln. Sehr praktisch dafür ist das package $lubridate$.  Damit kannst du die Datums-Variablen einfach transformieren. Auch ist es sinnvoll, kategoriale Variablen, welche aktuell im $string$-Format sind, in einen $factor$ zu transformieren. Behalte im Hinterkopf, welche Transformationen du durchgeführt hast, da wir diese später noch einmal für einen anderen Datensatz durchführen müssen.
 
-```{r, results = 'hide', output = FALSE, message = FALSE}
+```{r, eval = FALSE}
 library(lubridate)
 train$datetime <- ymd_hms(train$datetime)
 ```
 
-Wie man sehen kann gibt es eine Zeile pro Stunde und die Variable $count$, die Anzahl der in dieser Stunde ausgeliehenen Räder. Ziel ist es jetzt die Variable $count$ über den Gesamtverlauf aller 10885 Beobachtungen zu plotten. Essentiell dafür ist das package $ggplot2$, von dem du auch schon in den DataCamp Kursen gehört hast. Damit kannst du alle möglichen Plots von einfachen Scatterplots über Boxplots und Histogramme bis hin zu fancy Grafiken wie Violin-Plots erstellen. Starte für's Erste mit einem Scatterplot.  
+Wie man sehen kann gibt es eine Zeile pro Stunde und die Variable $count$, die Anzahl der in dieser Stunde ausgeliehenen Räder. Ziel ist es jetzt die Variable $count$ über den Gesamtverlauf aller 10885 Beobachtungen zu plotten. Praktisch dafür ist das package $ggplot2$, von dem du auch schon in den DataCamp Kursen gehört hast. Damit kannst du alle möglichen Plots von einfachen Scatterplots über Boxplots und Histogramme bis hin zu fancy Grafiken wie Violin-Plots erstellen. Starte für's Erste mit einem Scatterplot.  
   
 
-```{r, results = 'hide', output = FALSE}
+```{r,  eval = FALSE}
 library(ggplot2)
 ```
 Plotte damit die Anzahl der ausgeliehenen Räder ($count$) gegen die Zeit. Kannst du daraus schon etwas ablesen?
@@ -102,7 +137,7 @@ Wähle im nächsten Schritt einen beliebigen 7-Tage Zeitraum und visualisiere di
 knitr::include_graphics("Plots/Demand_Seven_day.png")
 ```
   
-Deiner Kreativität und deinen Design-Skills sind mit $ggplot2$ keine Grenzen gesetzt. Ein Bespiel, wie man die einfachen Plots anpassen kann, ist diese Visualisierung des Zusammenhangs zwischen der Nachfrage nach Leihrädern nach Tageszeit sowie der Außentemperatur. Aber keine Angst, solch ein detaillierter Plot wird nicht von dir erwartet. Es soll nur zeigen, zu welchen Visualisierungen $ggplot2()$ in der Lage ist.   
+Deiner Kreativität und deinen Design-Skills sind mit $ggplot2$ keine Grenzen gesetzt. Ein Bespiel, wie man einfache Scatterplots erweitern kann, ist diese Visualisierung des Zusammenhangs zwischen der Nachfrage nach Leihrädern nach Tageszeit sowie der Außentemperatur. Aber keine Angst, solch ein detaillierter Plot wird nicht von dir erwartet. Es soll nur zeigen, zu welchen Visualisierungen $ggplot2()$ in der Lage ist.   
 
 ```{r demandplot, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("Plots/Plot_Demand_by_Hour.png")
@@ -115,7 +150,7 @@ Wie in Aufgabe 1 festgestellt, scheint die Nachfrage nach Leihrädern nicht nur 
 
 Erster Schritt: In unserem Datensatz $train$ befindet sich die Zeitangabe in der Variable $datetime$. Wenn in der ersten Aufgabe alles funktioniert hat, ist diese sogar im $Date$-Format. Finde aus dieser den Wochentag heraus. Tipp: Nutze das schon vorher verwendete Package. Darin findet sich auch eine Funktion, mit der man den Wochentag herausfinden kann.
 
-```{r, include = FALSE}
+```{r, eval = FALSE}
 train$day <- wday(ymd_hms(train$datetime), label=TRUE)
 ```
 
@@ -127,7 +162,7 @@ knitr::include_graphics("Plots/Demand_hour_weekday_red.png")
 
 ## 3. Wie lange werden die Räder ausgeliehen? (data_month)
 
-Wir wechseln nun den Datensatz. Im vorherigen Kaggle-Datensatz waren die Anzahl der ausgeliehenen Fahrräder aggregiert nach Stunden. Auf der Website von Capital Bikeshare finden sich aber auch Datensätze auf einzelner Ausleih-Basis. Das heißt, jede einzelne Fahrt mit einem Fahrrad hat einen eigenen Eintrag in dem Datensatz. Wir haben beispielsweise die Daten von Februar 2019 schon in deinem Projekt geladen. Importiere diese Daten nun in deinen Workspace.    
+Wir wechseln nun den Datensatz. Im vorherigen Kaggle-Datensatz waren die Anzahl der ausgeliehenen Fahrräder aggregiert nach Stunden. Auf der Website von Capital Bikeshare finden sich aber auch Datensätze auf einzelner Fahrten-Basis. Das heißt, jede einzelne Fahrt mit einem Fahrrad hat einen eigenen Eintrag in dem Datensatz. Wir haben beispielsweise die Daten von Februar 2019 schon in deinem Projekt geladen. Importiere diese Daten nun in deinen Workspace.    
 
 ```{r, results = 'hide', output = FALSE}
 monthly <- read.csv("BikeSharing_data_201902.csv")
@@ -135,8 +170,7 @@ monthly <- read.csv("BikeSharing_data_201902.csv")
 
 Schaue dir nun mit den schon bekannten Funktionen die Struktur des Datensatzes an. Generiere die typischen Lagemaße für die einzelnen Variablen (mean, median, standard deviation, etc.). Was fällt dir dabei auf? In welcher Einheit ist die Ausleihzeit angegeben?
 In diesem Datensatz finden sich auch Angaben über die Mitgliedschaft der Kunden bei dem Bike Sharing Anbieter. $Member.type$ kann entweder $Member$ oder $Casual$ annehmen. Je nach Ausprägung dieser Variable ist der Kunde registriert oder nicht.
-Beschreibe die Ausleihzeiten je nach Art der Mitgliedschaft visuell.  
-Zum Beispiel kannst du dies in einem Density-Plot (siehe unten) darstellen. Probiere aber gerne wieder mehrere verschiedene Arten aus!  
+Beschreibe die Ausleihzeiten je nach Art der Mitgliedschaft visuell. Zum Beispiel kannst du dies in einem Density-Plot (siehe unten) darstellen. Probiere aber gerne wieder mehrere verschiedene Arten aus!  
 Tipp: in dem Datensatz befinden sich einige Ausreißer, die das Plotten schwierig gestalten. Überlege dir einen geeigneten Weg, damit umzugehen – sonst ist es schwer, einen lesbaren Graph zu erstellen.
 
 ```{r densityduration, echo=FALSE, out.width = '100%'}
@@ -172,7 +206,7 @@ End.lat & 100,558 & 38.904 & 0.023 & 38.783 & 38.895 & 38.913 & 39.124 \\
 \end{table} 
 
 ### 4.2 Koordinaten-Einträge mit Google Maps visualisieren (Bonus-Aufgabe)
-Dank deiner "merge-Skills" haben wir nun einen schönen Datensatz mit den Start- und End-Koordinaten zu jeder einzelnen Fahrt mit den Leihfahrrädern. Dieser Teil soll dir zeigen, was du nun mit Koordinaten-Daten anfangen kannst. Du kannst mit R über Googles API Karten von Google Maps in R importieren. Darauf kannst du dann Koordinaten einzeichnen und damit deinen Location-Datensatz visualisieren. Die Konfiguration der API ist etwas mühsam und man muss eine Kreditkarte bei Google hinterlegen (diese wird jedoch nicht belastet – der Service ist kostenlos). Deshalb musst du diese Aufgabe nicht bearbeiten – jedoch bekommst du damit sehr spannende Visualisierungen. Das ist aber ein tolles Beispiel, wie vielseitig und flexibel R einsetzbar ist.  
+Dank deiner "merge-Skills" haben wir nun einen schönen Datensatz mit den Start- und End-Koordinaten zu jeder einzelnen Fahrt mit den Leihfahrrädern. Dieser Teil soll dir zeigen, was du nun mit Koordinaten-Daten anfangen kannst. Du kannst mit R über Googles API Karten von Google Maps in R importieren. Darauf kannst du dann Koordinaten einzeichnen und damit deinen Location-Datensatz visualisieren. Die Konfiguration der API ist etwas mühsam und man muss eine Kreditkarte bei Google hinterlegen (diese wird jedoch nicht belastet – der Service ist kostenlos). Deshalb musst du diese Aufgabe nicht bearbeiten – jedoch bekommst du damit sehr spannende Visualisierungen. Das ist ein tolles Beispiel, wie vielseitig und flexibel R einsetzbar ist.  
 
 Unten siehst du ein einfaches Beispiel, wie man die Ausleihstationen auf einer Karte der Stadt Washington, DC einzeichnen kann. Für diesen Plot wurden die packages $ggmap$ sowie $mapsapi$ mit der Funktion $register\_google()$ verwendet. Eine erste Karte in R zu laden ist nicht ganz intuitiv. Google dich selbständig durch die verschiedenen Foren und Blogs, bis du zu einem ersten Ergebnis kommst. Besonders musst du darauf achten, einen sogenannten API key für den Zugriff auf die Kartendaten zu generieren und diesen dann in $register\_google()$ zu definieren.
 
@@ -196,13 +230,13 @@ Erstelle dir einen kostenlosen Account bei Kaggle und gehe dann zu dem Bike Shar
 
 \begin{center} https://www.kaggle.com/c/bike-sharing-demand \end{center}  
 
-Du erhälst unter \textit{Overview} eine detaillierte Einführung in das Projekt. Lese dir die Beschreibungen aufmerksam durch. Unter dem Reiter \textit{Kernels} findest du einige (sehr fortgeschrittene) Lösungen zu dem Projekt. Wenn du einmal nicht weiter kommen solltest, kannst du dir Inspirationen davon holen. Aber bitte copy und paste nicht einfach eine Lösung davon. Das bringt dich persönlich nicht weiter.  
+Du erhältst unter \textit{Overview} eine detaillierte Einführung in das Projekt. Lese dir die Beschreibungen aufmerksam durch. Unter dem Reiter \textit{Kernels} findest du einige (sehr fortgeschrittene) Lösungen zu dem Projekt. Wenn du einmal nicht weiter kommen solltest, kannst du dir Inspirationen davon holen. Aber bitte copy und paste nicht einfach eine Lösung davon. Das bringt dich persönlich nicht weiter.  
 
 
 ## 1. Untersuche den Zusammenhang zwischen den Variablen näher
 
 Wie stehen einzelne Variablen miteinander in Verbindung? Sprich inwiefern korrelieren die Variablen des Datensatzes miteinander? Das herauszufinden ist enorm wichtig für die Entscheidung, welches Modell du später anwenden kannst.  
-Ein guter Anfang ist es, eine Korrelationsmatrix zu erstellen. Du kannst das einfach mit dem $base$ package und der Funktion $cor()$ erstellen.
+Ein guter Anfang ist es, eine Korrelationsmatrix zu erstellen. Ein Teil dafür ist die Funktion $cor$ aus dem $base$ package.
 
 ```{r, results = 'hide', output = FALSE, message = FALSE}
 cor(train$temp, train$count)
@@ -216,14 +250,14 @@ Oder du visualisierst die Korrelationen in einer Heat-Map, wie nachfolgend darge
 knitr::include_graphics("Plots/CorrPlot.png")
 ```
 
-Aus diesem Graph kannst du schon sehr viel herauslesen. Scheinbar variiert die Nachfrage nach Fahrrädern sehr deutlich abhängig von der Tageszeit, sowie von der Temperatur.
+Aus diesem Graph kannst du schon sehr viel herauslesen. Scheinbar variiert die Nachfrage nach Fahrrädern sehr deutlich mit der Tageszeit sowie der Temperatur.
 
 ## 2. Teste verschiedene Modelle und deren Qualität
 
 Jetzt kannst du dich mit deinen Statistik-Kenntnissen austoben: Du brauchst jetzt ein Verfahren, wie du die Nachfrage nach Leihrädern zu einer bestimmten Zeit vorhersagen kannst.  
 Eine erste sehr einfache Herangehensweise wäre den Durchschnitt der Nachfrage als erste Vorhersage zu verwenden. Ziemlich sicher ist das jedoch nicht die beste Vorhersage.  
 
-Schon einmal was von einer linearen Regression gehört? Das wäre schon einmal ein deutlich besserer Ansatz. Jetzt kannst du deine Statistik-Skills ausspielen. Stelle doch einmal ein Modell mit der abhängigen Variable $count$ auf. Welche unabhängigen Variablen könnten die Nachfrage nach Leihrädern erklären? Hat das Wetter etwas mit der Nachfrage zu tun? Leihen mehr Personen Fahrräder unter der Woche oder am Wochenende aus?  
+Schon einmal was von einer linearen Regression gehört? Das wäre ein deutlich besserer Ansatz. Jetzt kannst du deine Statistik-Skills ausspielen. Stelle doch einmal ein Modell mit der abhängigen Variable $count$ auf. Welche unabhängigen Variablen könnten die Nachfrage nach Leihrädern erklären? Hat das Wetter etwas mit der Nachfrage zu tun? Leihen mehr Personen Fahrräder unter der Woche oder am Wochenende aus?  
 
 Starte mit einem ganz einfachen Modell mit nur einer erklärenden Variable. Zum Beispiel so:
 
@@ -238,7 +272,7 @@ summary(model)
 
 
 Hat die Temperatur einen statistisch signifikanten Einfluss auf die Nachfrage nach Leihfahrrädern? Vermutlich ja.  
-Wenn wir jedoch bei diesem sehr vereinfachten Modell bleiben, begehen wir einen typischen Fehler: Den sogenannten Omitted Variable Bias (OVB). Grob vereinfacht gesprochen vernachlässigen wir (im Statistik-Jargon: kontrollieren nicht für) Variablen, die einen signifikanten Einfluss auf die abhängige Variable haben. Man könnte vermuten, dass die Tageszeit auch eine große Rolle bei der Nachfrage nach Fahrrädern spielt. Wenn wir diese also nicht mit aufnehmen, ist die Schätzung des Effektes der Temperatur verzerrt und damit schlecht zu gebrauchen.  
+Wenn wir jedoch bei diesem sehr vereinfachten Modell bleiben, begehen wir einen typischen Fehler: Den sogenannten Omitted Variable Bias (OVB). Grob vereinfacht gesprochen vernachlässigen wir (im Statistik-Jargon: kontrollieren nicht für) Variablen, die einen signifikanten Einfluss auf die abhängige Variable haben. Man könnte vermuten, dass die Tageszeit auch eine große Rolle bei der Nachfrage nach Fahrrädern spielt. Wenn wir diese also nicht mit aufnehmen, ist die Schätzung des Effektes der Temperatur verzerrt und damit schlecht zu gebrauchen. In diesem Fall ist das vorerst kein großes Problem für uns, da wir nicht an kausalen Effekten, sondern aussließlich an einer möglichst guten Vorhersage interessiert sind. Deinem Statistik-Prof würden bei so einem Modell ziemlich sicher die Haare zu Berge stehen. Nichtsdestotrotz wird dieses Modell mit nur einer einzigen erklärenden Variable die Nachfrage nicht gut vorhersagen.  
 
 Eine Lösungsmöglichkeit ist, die vernachlässigten Variablen einfach mit in das Modell aufzunehmen – wie praktisch, dass diese auch schon in dem Datensatz enthalten sind. Stellen wir also ein umfangreicheres Modell auf, das die Tageszeit mit aufnimmt:
 
@@ -283,7 +317,7 @@ Tipp: Solch eine Tabelle kannst du relativ einfach mit dem package *stargazer* e
 
 Jetzt bist du dran: Probiere mehrere Kombinationen aus und vergleiche die Ergebnisse deiner Modelle. Hinterfrage dabei immer kritisch, ob es Sinn macht, eine jeweilige Variable in das Modell mit aufzunehmen und was das für die Qualität deines Modells bedeutet.  
 
-Hier sind deiner Kreativität keine Grenze gesetzt. Du musst nicht bei einer einfachen linearen Regression bleiben. Gibt es nicht-lineare Zusammenhänge? Wie geht man mit unrealistischen Vorhersagen um? Warum nicht einmal ein künstliches Neuronales Netz mit dem Regressionsmodell vergleichen?
+Hier sind deiner Kreativität keine Grenzen gesetzt. Du musst nicht bei einer einfachen linearen Regression bleiben. Gibt es nicht-lineare Zusammenhänge? Wie geht man mit unrealistischen Vorhersagen um? Warum nicht einmal ein künstliches Neuronales Netz mit dem Regressionsmodell vergleichen? Inspiriere dich gerne bei den Kernels zu dieser Challenge auf Kaggle!
 
 ## 3. Von Training zu Testen – Treffe Vorhersagen
 
@@ -292,7 +326,7 @@ Jetzt hast du dein Modell ausgewählt und mit dem Trainings-Datensatz *trainiert
 Hat dein Modell nur die vorhandenen Muster im Trainings-Datensatz "auswendig" gelernt? Dann wären die Zusammenhänge aus dem Trainings-Datensatz nicht übertragbar auf den Test-Datensatz. Beim sogenannten overfitting hat das Modell zu nah am Trainings-Datensatz gelernt und liefert deshalb schlechte Vorhersagen bei unbekannten Daten – in deinem Test-Datensatz.  
 Auf der andern Seite gibt es auch das Problem underfitting: Dein Modell hat die tatsächlichen Zusammenhänge der Daten nicht gelernt und sagt deshalb in dem Test-Datensatz schlecht voraus. Es gilt also die goldene Mitte zwischen den beiden Problemen zu finden.  
 
-Jetzt wird die Unterscheidung zwischen Trainings- und Testdatensatz wichtig. Wir nutzen $train$, um ein Modell zu *trainieren* und $test$, um die Qualität unseres Modells letztendlich zu *testen*. Wir haben bereits die benötigten Daten in deinem Workspace geladen. 
+Jetzt wird die Unterscheidung zwischen Trainings- und Testdatensatz wichtig. Wir nutzen $train$, um ein Modell zu *trainieren* und $test$, um die Qualität unseres Modells letztendlich zu *testen*. Wir haben bereits die benötigten Daten in deinem Working Directory hochgeladen. 
 
 Lade nun zusätzlich zu dem Datensatz $train$, den du bereits vorher verwendet hast, den Datensatz $test$:
 
@@ -302,7 +336,7 @@ test <- read.csv("BikeSharing_data_test.csv")
 
 Erinnerst du dich an die Transformationen, welche du auf den $test$ Datensatz angewandt hast? Denke daran, diese Transformationen noch einmal für $test$ durchzuführen, da du später deine Methoden auch darauf anwenden wirst und dies nur bei identisch transformierten Variablen in beiden Datensätzen funktioniert.
 
-Jetzt heißt es, dein favorisiertes Modell auf den Test-Datensatz anzuwenden. Dabei ist die Funktion $predict()$ sehr hilfreich. Diese gibt einen Vektor von allen Vorhersagen eines bestimmten Modells aus. Hier kannst du jetzt spezifizieren, mit welchem Datensatz das ganze geschehen soll. In diesem Fall ist das der Test-Datensatz.  
+Jetzt heißt es, dein favorisiertes Modell auf den Test-Datensatz anzuwenden. Dabei ist die Funktion $predict()$ sehr hilfreich. Diese gibt einen Vektor aller Vorhersagen eines bestimmten Modells aus. Hier kannst du jetzt spezifizieren, mit welchem Datensatz das ganze geschehen soll. In diesem Fall ist das der Test-Datensatz.  
 
 Im zweiten Schritt erstellst du dann einen neuen Datensatz, der sowohl die Datums-Variable als auch unsere Vorhersage enthält. Das klappt zum Beispiel mit der Funktion $data.frame()$. Ziel ist es, die Variable $count$ für den $test$ Datensatz mit dem Modell aus dem $train$ Datensatz vorherzusagen.
 
@@ -312,7 +346,7 @@ Danach kannst du wieder einen Schritt zurück zum Visualisieren gehen. Überprü
 knitr::include_graphics("Plots/Histogram2.png")
 ```
 
-In diesem Histogramm sehen wir die Verteilung der Vorhersagen aus einem sehr simplen Regressionsmodell: Auffällig ist, dass wir negative Nachfrage nach Leihfarrädern vorhergesagt haben. Macht das Sinn?  Mit Grafiken kannst du relativ einfach überprüfen, ob deine Ergebnisse Sinn machen. Wir können nun unser Modell weiter anpassen, um diesen "Fehler" zu vermeiden. Die einfachste Möglichkeit ist, alle negativen Werte durch 0 zu ersetzen. Das ist aber ziemlich sicher nicht die beste Methode! Findest du einen sinnvolleren Weg, keine negativen Werte vorherzusagen?
+In diesem Histogramm sehen wir die Verteilung der Vorhersagen aus einem sehr simplen Regressionsmodell: Auffällig ist, dass wir negative Nachfrage nach Leihfarrädern vorhergesagt haben. Macht das Sinn?  Mit Grafiken kannst du relativ einfach überprüfen, ob deine Ergebnisse den einfachen Realitäts-Check überstehen. Wir können nun unser Modell weiter anpassen, um diesen "Fehler" zu vermeiden. Die einfachste Möglichkeit ist, alle negativen Werte durch 0 zu ersetzen. Das ist aber ziemlich sicher nicht die beste Methode! Findest du einen sinnvolleren Weg, keine negativen Werte vorherzusagen?
 
 ```{r Histogram, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("Plots/Histogram.png")
@@ -322,7 +356,7 @@ knitr::include_graphics("Plots/Histogram.png")
 
 ## 4. Lade den Datensatz auf Kaggle hoch
 
-Wenn du mit deinem Modell und den Vorhersagen zufrieden bist, lade den Datensatz auf Kaggle hoch. Du siehst dann gleich, wie deine Lösung im Vergleich zu anderen Teilnehmern abschließt. Aber keine Angst vor einer schlechten Platzierung, auf Kaggle misst du dich mit extrem guten Data Scientists.  
+Wenn du mit deinem Modell und den Vorhersagen zufrieden bist, lade den Datensatz auf Kaggle hoch. Du siehst dann gleich, wie deine Lösung im Vergleich zu anderen Teilnehmern abschneidet. Aber keine Angst vor einer schlechten Platzierung, auf Kaggle misst du dich mit extrem guten Data Scientists.  
 
 Zufrieden mit dem Ergebnis? Nein? Dann gehe noch einmal ein paar Schritte zurück und verfeinere dein Modell. Du kannst beliebig oft eine Lösung auf Kaggle hochladen.
 
