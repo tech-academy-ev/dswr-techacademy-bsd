@@ -1,0 +1,373 @@
+---
+title:
+- "Data Science with R – Bike Sharing Demand – Solution Sketch"
+author: 
+- "Lukas Jürgensmeier"
+- "Benjamin Lucht"
+- "Joel Tecle"
+date: "Sommersemester 2019"
+output:
+  pdf_document:
+    toc: no
+fontsize: 11pt
+geometry: margin=1in, a4paper
+header-includes:
+- \usepackage{titling}
+- \pretitle{\begin{center}\LARGE\includegraphics[width=12cm]{TA_Logo.png}\\[\bigskipamount]}
+- \posttitle{\end{center}}
+- \usepackage{fancyhdr}
+- \usepackage{setspace}
+- \usepackage{chngcntr}
+- \onehalfspacing
+- \fancyfoot{}
+- \fancyfoot[R]{\thepage}
+fontfamily: mathpazo
+editor_options:
+  chunk_output_type: console
+---
+
+\clearpage
+
+\addtolength{\headheight}{17.82275pt}
+\pagestyle{fancyplain}
+ \fancyfoot[L]{Bike Sharing Demand – Solution Sketch | \copyright\ 2019, TechAcademy e.V.}
+  
+\rhead{\includegraphics[height=0.5cm]{TA_logo.png}}
+\renewcommand{\headrulewidth}{0.25pt}
+\renewcommand{\footrulewidth}{0.25pt}
+\renewcommand{\contentsname}{Inhalt}
+\tableofcontents
+\clearpage
+
+# What's this document about?
+Before we start, a few comments on this document.  
+This is one starting point for the Bike Sharing Project. I include all code for the plots in the project Guidelines. Also, I included a very simple regression model for the kaggle challange. This is obviously very poor, but the main focus is not on building the best possible model, but on getting the project running.  
+Refer to this document if the participants have technical (i.e. code-related) questions regarding the Problem Set.
+
+# Packages
+```{r,  warning=FALSE, message=FALSE}
+library(GGally) # for corrplot()
+library(ggplot2) # for visualization
+library(lubridate) # deals with dates
+library(dplyr) # for data wrangling
+library(scales)
+library(stargazer) # for nice LaTeX tables
+library(car) #for vif()
+library(ggmap) # for creating a map
+library(magick) # for including a .png in plots
+```
+
+# Explorative Datenanalyse – Lerne den Datensatz kennen
+## 1. Plot des Ausleihverhaltens über die Zeit (train data set)
+At this point, only importing the train data set is necessary. However, for the sake of completeness, I also import the test data set at this point.
+
+```{r}
+train <- read.csv("BikeSharing_data.csv")
+test <- read.csv("BikeSharing_data_test.csv")
+head(train)
+str(train)
+summary(train)
+```
+
+Transformations: We'll need to do some data wrangling here. Most of those transformations (except $hour()$ and $weekday()$) are not necessary for plotting. At this point the participants only do those for the train data set and only later repeat those steps for the train data set. This solution includes a creation of the variable $jitter_times$. This one is not required for the prediction, but only for the plot over hour of the day. If we didn't include that jitter, there would only be data points on full hours.
+
+```{r}
+#transformation for train dataset
+train$hour  <- hour(ymd_hms(train$datetime))
+train$times <- as.POSIXct(strftime(ymd_hms(train$datetime), format="%H:%M:%S"), format="%H:%M:%S")
+train$jitter_times <- train$times+minutes(round(runif(nrow(train),min=0,max=59)))
+train$day <- wday(ymd_hms(train$datetime), label=TRUE)
+
+#transformation for test dataset
+test$hour  <- hour(ymd_hms(test$datetime))
+test$times <- as.POSIXct(strftime(ymd_hms(test$datetime), format="%H:%M:%S"), format="%H:%M:%S")
+test$jitter_times <- test$times+minutes(round(runif(nrow(test),min=0,max=59)))
+test$day <- wday(ymd_hms(test$datetime), label=TRUE)
+
+#for train dataset
+train$season <- as.factor(train$season)
+train$holiday <- as.factor(train$holiday)
+train$workingday <- as.factor(train$workingday)
+train$weather <- as.factor(train$weather)
+train$day <- factor(train$day, ordered = FALSE)
+
+#for test data set
+test$season <- as.factor(test$season)
+test$holiday <- as.factor(test$holiday)
+test$workingday <- as.factor(test$workingday)
+test$weather <- as.factor(test$weather)
+test$day <- factor(test$day, ordered = FALSE)
+```
+
+Create the demand vs date plot during the first 7 days.
+```{r abc}
+ggplot(train[1:168,], aes(datetime, count)) +
+  geom_line(group = 24) +
+  scale_x_discrete(breaks=c("2011-01-01 00:00:00","2011-01-03 00:00:00", "2011-01-05 00:00:00", "2011-01-07 00:00:00"), labels=c("Jan 01", "Jan 03", "Jan 05", "Jan 07")) +
+  theme_light(base_size=12) +
+  labs(title = "Demand Over a Seven-Day Period",
+       subtitle = "Looks like there is some seasonality",
+       x = "Date and Time",
+       y = "Number of Bike Rentals") +
+  theme(plot.title = element_text(color = "#3c4ee0", face = 'bold'))
+
+# assigning the TechAcademy Logo to an object to include it in the plots
+TA_logo <- image_read("TA_logo.png")
+# add TechAcademy Logo
+grid::grid.raster(TA_logo, x = 0.01, y = 0.02, just = c('left', 'bottom'), width = unit(1.5, 'inches'))
+```
+
+This is a more advanced plot, which is not required. Should only serve as an inspiration for the participants and show what ggplot2 is capable of. Data set is filtered to working days only, since this particular pattern is only visible on working days. On weekends, the distribution looks completely different.
+
+```{r}
+ggplot(train[train$workingday==1,], aes_string("jitter_times", "count", color="temp")) +
+     geom_point(position=position_jitter(w=0.0, h=0.4), alpha = 0.7) +
+     theme_light(base_size=12) +
+     scale_x_datetime(breaks = date_breaks("4 hours"), labels=date_format("%I:%M %p")) + 
+     labs(title = 'Bike Sharing Demand by Hour of the Day',
+          subtitle = "On workdays, most bikes are rented on warm mornings and evenings",
+          caption = "by TechAcademy e.V., based on Ben Hammer/Kaggle",
+          x = "Hour of the Day",
+          y = "Number of Bike Rentals") +
+     scale_colour_gradientn("Temp (°C)", colours=c("#5e4fa2", "#3288bd", "#66c2a5", "#abdda4", "#e6f598", "#fee08b", "#fdae61", "#f46d43", "#d53e4f", "#9e0142")) +
+      theme(plot.title = element_text(color = "#3c4ee0", face = 'bold'))
+
+# add TechAcademy Logo
+grid::grid.raster(TA_logo, x = 0.01, y = 0.02, just = c('left', 'bottom'), width = unit(1.5, 'inches'))
+```
+
+
+## 2. Ausleihverhalten nach Wochentag (train data set)
+This exercise should make clear that there is da very different pattern in $count$ depending on day of the week. This can be achieved by grouping the different week days by color in a scatterplot.
+
+```{r}
+ggplot(train, aes(hour, count)) +
+  geom_jitter(aes(color = day), shape = 1, width = 0.5, alpha = 0.5) +
+  theme_light(base_size=12) +
+  labs(title = "Demand by Hour and Weekday",
+       subtitle = "There are two very different patterns depending on the weekday",
+       x = "Hour",
+       y = "Number of Bike Rentals",
+       caption = "by TechAcademy e.V.") +
+  theme(plot.title = element_text(color = "#3c4ee0", face = 'bold')) +
+  scale_colour_manual(name="Day", values= c("red", "black", "black", "black", "black", "black", "red"))
+
+# add TechAcademy Logo
+grid::grid.raster(TA_logo, x = 0.01, y = 0.02, just = c('left', 'bottom'), width = unit(1.5, 'inches'))
+```
+
+
+## 3. Wie lange werden die Räder ausgeliehen? (data_month)
+
+Important: We're switching data sets here.  
+First, import and glimpse into the monthly data set:
+```{r}
+monthly <- read.csv("BikeSharing_data_201902.csv")
+head(monthly)
+str(monthly)
+```
+
+$Duration$ is in seconds. For better readability (esp. in plots), transform it to minutes.
+```{r}
+monthly$Duration <- monthly$Duration/60
+```
+
+Density Plot of Rental Duration. Important to specify the limits of the x-axis or deal with the outliers in a different war. Else, it is very hard to interpret the density plot.
+```{r}
+ggplot(monthly, aes(Duration)) +
+  geom_density(aes(y=..density.., fill = Member.type), alpha = 0.6) +
+  xlim(0, 60) +
+  theme_light(base_size=12) +
+  labs(title = 'Density Plot of Rental Duration',
+       x = "Rental Duration in Minutes",
+       subtitle = "There seems to be a structural difference between the two groups") +
+  theme(plot.title = element_text(color = "#3c4ee0", face = 'bold')) +
+  scale_fill_manual(name= "Membership Type", values = c("black", "#3c4ee0"))
+```
+
+
+## 4. Mergen & Karten zeichnen (data_month)
+
+This part consists of two tasks. First, we need to merge two data sets to find out the coordinates for the start and end stations. The second task introduces the Google Maps API and shows how we can visualize coordinates on a map. The second one is not mandatory, since you need to enter credit card information to gain access to the API.
+
+### 4.1 Datensätze mergen
+
+We now merge two data sets in order to get the coordinates of the start and end station into the $monthly$ data set. This will probably cause a lot of headaches among the students, but the solution is quite simple (in hindsight).
+
+First, import the $stations$ data set. This serves as a lookup table.
+```{r}
+stations <- read.csv("BikeSharing_data_stations.csv")
+head(stations)                     
+summary(stations)
+```
+
+```{r}
+# First, merge the the two data sets by Start.station.number
+monthly <- merge(monthly, stations, by.x ="Start.station.number", by.y = "Station.number")
+
+#then rename the variables including coordinates to reflect the starting station
+monthly <- monthly %>% 
+  rename(start.station.name = Station.name,
+         start.lon = lon,
+         start.lat = lat)
+
+# then do the same for the end stations
+monthly <- merge(monthly, stations, by.x ="End.station.number", by.y = "Station.number")
+monthly <- monthly %>% 
+  rename(End.station.name = Station.name,
+         End.lon = lon,
+         End.lat = lat)
+```
+
+Now check if everything went well. We need to have four more variables in the data set, each two coordinates for the start as well as the end station.
+```{r}
+head(monthly)
+str(monthly)
+```
+
+### 4.2 Koordinaten-Einträge mit Google Maps visualisieren (Bonus-Aufgabe)
+Configure your own Google Maps API first
+```{r}
+# The API Key is confidential, since it is linked to a credit card
+# To run this on your machine, create your own account with Google
+# and replace this fake key with your real one.
+# You'll then be able to create your own map.
+register_google(key = "INSERT YOUR KEY HERE")
+```
+
+Then download the map from Google Maps with this function. I set the location based on the mean values of our data set's coordinates. You can also just type in the city as a string (i.e. "Washington, DC").
+The following map code snippets are causing problems with RMarkdown, so I set eval = FALSE.
+```{r, eval = FALSE}
+DC_map <- get_map(location = c(lon = mean(monthly$start.lon),lat = mean(monthly$start.lat)),
+                  zoom = 13,
+                  maptype = "roadmap", scale = 2)
+```
+
+This draws all start locations on the map of Washington, DC.
+```{r, eval = FALSE}
+#this package causes problems with RMarkdown, so I put it here.
+library(mapsapi) # for configuring the Google Maps API
+
+ggmap(DC_map) + 
+  geom_point(data = monthly,
+             aes(x = start.lon, y = start.lat, alpha = 0.8),
+             color = "#3c4ee0",
+             size = 1,
+             shape = 3) +
+  theme_light(base_size=12) +
+  labs(title = 'Location of Rental Bike Stations',
+       x = "Longitude",
+       y = "Latitude",
+       subtitle = "Stations seem to be clustered in the city center") +
+  theme(plot.title = element_text(color = "#3c4ee0", face = 'bold'),
+        legend.position = "none")
+```
+
+You can also play around with densities. This map shows the density of stations additionally to the single stations.
+
+```{r, eval = FALSE}
+ggmap(DC_map) +
+  guides(fill=FALSE, alpha=FALSE, size=FALSE) +
+  stat_density2d(data = monthly,
+                 aes(x = start.lon, y = start.lat, fill = ..level.., alpha = ..level..),
+                 size = 0.01,
+                 bins = 16,
+                 geom = "polygon") +
+  scale_fill_gradient(low = "grey", high = "red") +
+  geom_point(data = monthly,
+             aes(x = start.lon, y = start.lat, alpha = 0.8),
+             color = "blue", size = 1, shape = 3) +
+  theme_light(base_size=12) +
+  labs(title = 'Density of Rental Bike Stations',
+       x = "Longitude",
+       y = "Latitude",
+       subtitle = "Stations seem to be clustered in the city center") +
+  theme(plot.title = element_text(color = "#3c4ee0", face = 'bold'),
+        legend.position = "none")
+```
+
+A very nice visualisation would show the densities of $count$. Therfore you would need to transform the data set a little bit. 
+
+# Nachfrage-Prognose – Wende statistische Methoden an
+## 1. Untersuche den Zusammenhang zwischen den Variablen näher
+
+First, check correlations
+```{r}
+# in a table
+round(cor(train[sapply(train, is.numeric)]),2)
+
+# in a heat map
+ggcorr(train, low = "black", mid = "white", high = "#3c4ee0", label = TRUE, label_alpha = TRUE, angle = 90) +
+  theme_light(base_size=12) +
+     labs(title = 'Heat Map',
+          subtitle = "Correlation among numeric variables in the training data ",
+          caption = " ") +
+      theme(plot.title = element_text(color = "#3c4ee0", face = 'bold'))
+      
+# Add TechAcademy Logo
+grid::grid.raster(TA_logo, x = 0.19, y = 0.02, just = c('left', 'bottom'), width = unit(1.5, 'inches'))
+```
+
+
+## 2. Teste verschiedene Modelle und deren Qualität
+
+Then, set up simple models. Note: this is just a starting point. Those models are obviously very much improvable.
+
+```{r}
+model1 <- lm(count ~ temp , data = train)
+model2 <- lm(count ~ temp + hour, data = train)
+```
+
+Very important here is that $hour$ is a numeric variable. It doesn't make too much sense to include it like that. Transform it to a dummy for a better model.
+
+```{r, results='asis'}
+stargazer(model1, model2,
+          type = "latex",
+          column.labels = c(),
+          title = "Model Comparison",
+          style = "default",
+          font.size = "small",
+          header = FALSE)
+```
+
+## 4. Lade den Datensatz auf Kaggle hoch
+create new prediction data set
+```{r}
+# extract predicted values from model and fit them to test df
+predictions_model2 <- predict(model2, test)
+
+# create new df with only datetime and count
+submit_model2 <- data.frame(datetime = test$datetime, count = predictions_model2)
+
+
+```
+
+Then, check the submission data set
+```{r}
+head(submit_model2)
+
+ggplot(submit_model2, aes(count)) +
+  geom_histogram(aes(y=..density..), binwidth = 10, color = "black", fill = "#3c4ee0") +
+  geom_density(aes(y=..density..)) +
+  theme_light(base_size=12) +
+     labs(title = 'Histogram of Predicted Values',
+          x = "Predicted demand for shared bikes (count)",
+          subtitle = "Does it make sense that we predict negative demand? ") +
+      theme(plot.title = element_text(color = "#3c4ee0", face = 'bold'))
+
+# Add TechAcademy Logo
+grid::grid.raster(TA_logo, x = 0.02, y = 0.02, just = c('left', 'bottom'), width = unit(1.5, 'inches'))
+```
+Refine the predicions based on that evaluation. A very simple fix is to eliminate the negative predictions. However, it might be better to choose a different model
+
+```{r}
+# negative count values don't make sense; replace them with 0
+submit_model2$count[submit_model2$count<0] <- 0
+```
+
+As a last step, write the results to a .csv file for submission
+```{r}
+write.csv(submit_model2, file="submit_model2.csv", row.names=FALSE)
+```
+
+Then, upload this file to Kaggle.
