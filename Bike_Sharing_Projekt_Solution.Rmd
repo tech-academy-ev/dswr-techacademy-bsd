@@ -41,8 +41,8 @@ editor_options:
 
 # What's this document about?
 Before we start, a few comments on this document.  
-This is one starting point for the Bike Sharing Project. I include all code for the plots in the project Guidelines. Also, I included a very simple regression model for the kaggle challange. This is obviously very poor, but the main focus is not on building the best possible model, but on getting the project running.  
-Refer to this document if the participants have technical (i.e. code-related) questions regarding the Problem Set.
+This is one starting point for the Bike Sharing Project. I include all code for the plots from the project guideline ("Projektleitfaden"). Also, I included a very simple regression model for the Kaggle challange. This obviously predicts very poorly. The main focus is not on building the best possible model, but on getting the project up and running.  
+Refer to this document if the participants have technical (i.e. code-related) questions regarding the Exercises.
 
 # Packages
 ```{r,  warning=FALSE, message=FALSE}
@@ -69,7 +69,7 @@ str(train)
 summary(train)
 ```
 
-Transformations: We'll need to do some data wrangling here. Most of those transformations (except $hour()$ and $weekday()$) are not necessary for plotting. At this point the participants only do those for the train data set and only later repeat those steps for the train data set. This solution includes a creation of the variable $jitter_times$. This one is not required for the prediction, but only for the plot over hour of the day. If we didn't include that jitter, there would only be data points on full hours.
+Transformations: We'll need to do some data wrangling here. Most of those transformations (except $hour()$ and $weekday()$) are not necessary for plotting. At this point the participants only do those for the train data set and at a later stage repeat those steps for the train data set. This solution includes a creation of the variable $jitter\_times$. This one is not required for the prediction, but  for the plot by hour of the day. If we didn't include that jitter, there would only be data points on full hours.
 
 ```{r}
 #transformation for train dataset
@@ -117,7 +117,7 @@ TA_logo <- image_read("TA_logo.png")
 grid::grid.raster(TA_logo, x = 0.01, y = 0.02, just = c('left', 'bottom'), width = unit(1.5, 'inches'))
 ```
 
-This is a more advanced plot, which is not required. Should only serve as an inspiration for the participants and show what ggplot2 is capable of. Data set is filtered to working days only, since this particular pattern is only visible on working days. On weekends, the distribution looks completely different.
+The following one is a more advanced plot, which is not required. It should only serve as an inspiration for the participants and show what $ggplot2$ is capable of. Data set is filtered to working days only, since this particular pattern is only visible on working days. On weekends, the distribution looks completely different.
 
 ```{r}
 ggplot(train[train$workingday==1,], aes_string("jitter_times", "count", color="temp")) +
@@ -126,7 +126,7 @@ ggplot(train[train$workingday==1,], aes_string("jitter_times", "count", color="t
      scale_x_datetime(breaks = date_breaks("4 hours"), labels=date_format("%I:%M %p")) + 
      labs(title = 'Bike Sharing Demand by Hour of the Day',
           subtitle = "On workdays, most bikes are rented on warm mornings and evenings",
-          caption = "by TechAcademy e.V., based on Ben Hammer/Kaggle",
+          caption = "based on Ben Hammer's Kaggle Solution",
           x = "Hour of the Day",
           y = "Number of Bike Rentals") +
      scale_colour_gradientn("Temp (°C)", colours=c("#5e4fa2", "#3288bd", "#66c2a5", "#abdda4", "#e6f598", "#fee08b", "#fdae61", "#f46d43", "#d53e4f", "#9e0142")) +
@@ -138,7 +138,7 @@ grid::grid.raster(TA_logo, x = 0.01, y = 0.02, just = c('left', 'bottom'), width
 
 
 ## 2. Ausleihverhalten nach Wochentag (train data set)
-This exercise should make clear that there is da very different pattern in $count$ depending on day of the week. This can be achieved by grouping the different week days by color in a scatterplot.
+This exercise should make clear that there is a very different pattern in $count$ depending on day of the week. This can be achieved by grouping the different week days by color in a scatterplot.
 
 ```{r}
 ggplot(train, aes(hour, count)) +
@@ -147,8 +147,7 @@ ggplot(train, aes(hour, count)) +
   labs(title = "Demand by Hour and Weekday",
        subtitle = "There are two very different patterns depending on the weekday",
        x = "Hour",
-       y = "Number of Bike Rentals",
-       caption = "by TechAcademy e.V.") +
+       y = "Number of Bike Rentals")+
   theme(plot.title = element_text(color = "#3c4ee0", face = 'bold')) +
   scale_colour_manual(name="Day", values= c("red", "black", "black", "black", "black", "black", "red"))
 
@@ -172,7 +171,7 @@ $Duration$ is in seconds. For better readability (esp. in plots), transform it t
 monthly$Duration <- monthly$Duration/60
 ```
 
-Density Plot of Rental Duration. Important to specify the limits of the x-axis or deal with the outliers in a different war. Else, it is very hard to interpret the density plot.
+Now, participants should create something like a Density Plot of Rental Duration, distinguished by $Membership.type$. It's important to specify the limits of the x-axis or deal with the outliers in some other way. Else, it is very hard to interpret the density plot.
 ```{r}
 ggplot(monthly, aes(Duration)) +
   geom_density(aes(y=..density.., fill = Member.type), alpha = 0.6) +
@@ -219,35 +218,35 @@ monthly <- monthly %>%
          End.lat = lat)
 ```
 
-Now check if everything went well. We need to have four more variables in the data set, each two coordinates for the start as well as the end station.
+Now check if everything went well. We need to have four more variables in the data set, each two coordinates for the start as well as the end station. Note that the first few entries belong to the same station. It is therefore okay, if the first few coordinates are the same.
 ```{r}
 head(monthly)
 str(monthly)
 ```
 
 ### 4.2 Koordinaten-Einträge mit Google Maps visualisieren (Bonus-Aufgabe)
-Configure your own Google Maps API first
-```{r}
+Configure your own Google Maps API first. You'll find more information how to configure the API at https://lucidmanager.org/geocoding-with-ggmap/  
+
+```{r, eval = FALSE}
 # The API Key is confidential, since it is linked to a credit card
 # To run this on your machine, create your own account with Google
 # and replace this fake key with your real one.
 # You'll then be able to create your own map.
+library(mapsapi) # for configuring the Google Maps API
 register_google(key = "INSERT YOUR KEY HERE")
 ```
 
 Then download the map from Google Maps with this function. I set the location based on the mean values of our data set's coordinates. You can also just type in the city as a string (i.e. "Washington, DC").
-The following map code snippets are causing problems with RMarkdown, so I set eval = FALSE.
+The following chunks for the maps are causing problems with RMarkdown, so I set eval = FALSE.
 ```{r, eval = FALSE}
-DC_map <- get_map(location = c(lon = mean(monthly$start.lon),lat = mean(monthly$start.lat)),
+DC_map <- get_map(location = c(lon = mean(monthly$start.lon),
+                               lat = mean(monthly$start.lat)),
                   zoom = 13,
                   maptype = "roadmap", scale = 2)
 ```
 
 This draws all start locations on the map of Washington, DC.
 ```{r, eval = FALSE}
-#this package causes problems with RMarkdown, so I put it here.
-library(mapsapi) # for configuring the Google Maps API
-
 ggmap(DC_map) + 
   geom_point(data = monthly,
              aes(x = start.lon, y = start.lat, alpha = 0.8),
@@ -286,7 +285,7 @@ ggmap(DC_map) +
         legend.position = "none")
 ```
 
-A very nice visualisation would show the densities of $count$. Therfore you would need to transform the data set a little bit. 
+A very nice additional visualisation would be to show the densities of $count$ by station.
 
 # Nachfrage-Prognose – Wende statistische Methoden an
 ## 1. Untersuche den Zusammenhang zwischen den Variablen näher
@@ -297,7 +296,8 @@ First, check correlations
 round(cor(train[sapply(train, is.numeric)]),2)
 
 # in a heat map
-ggcorr(train, low = "black", mid = "white", high = "#3c4ee0", label = TRUE, label_alpha = TRUE, angle = 90) +
+ggcorr(train, low = "black", mid = "white", high = "#3c4ee0",
+       label = TRUE, label_alpha = TRUE, angle = 90) +
   theme_light(base_size=12) +
      labs(title = 'Heat Map',
           subtitle = "Correlation among numeric variables in the training data ",
@@ -305,7 +305,8 @@ ggcorr(train, low = "black", mid = "white", high = "#3c4ee0", label = TRUE, labe
       theme(plot.title = element_text(color = "#3c4ee0", face = 'bold'))
       
 # Add TechAcademy Logo
-grid::grid.raster(TA_logo, x = 0.19, y = 0.02, just = c('left', 'bottom'), width = unit(1.5, 'inches'))
+grid::grid.raster(TA_logo, x = 0.19, y = 0.02,
+                  just = c('left', 'bottom'), width = unit(1.5, 'inches'))
 ```
 
 
@@ -318,7 +319,7 @@ model1 <- lm(count ~ temp , data = train)
 model2 <- lm(count ~ temp + hour, data = train)
 ```
 
-Very important here is that $hour$ is a numeric variable. It doesn't make too much sense to include it like that. Transform it to a dummy for a better model.
+Very important here is that $hour$ is a numeric variable. It doesn't make too much sense to include it like that. Transform it to a factor for a better model.
 
 ```{r, results='asis'}
 stargazer(model1, model2,
@@ -331,7 +332,7 @@ stargazer(model1, model2,
 ```
 
 ## 4. Lade den Datensatz auf Kaggle hoch
-create new prediction data set
+Create new prediction data set
 ```{r}
 # extract predicted values from model and fit them to test df
 predictions_model2 <- predict(model2, test)
@@ -352,11 +353,12 @@ ggplot(submit_model2, aes(count)) +
   theme_light(base_size=12) +
      labs(title = 'Histogram of Predicted Values',
           x = "Predicted demand for shared bikes (count)",
-          subtitle = "Does it make sense that we predict negative demand? ") +
+          subtitle = "Does it make sense that we predict negative demand?") +
       theme(plot.title = element_text(color = "#3c4ee0", face = 'bold'))
 
 # Add TechAcademy Logo
-grid::grid.raster(TA_logo, x = 0.02, y = 0.02, just = c('left', 'bottom'), width = unit(1.5, 'inches'))
+grid::grid.raster(TA_logo, x = 0.02, y = 0.02, just = c('left', 'bottom'),
+                  width = unit(1.5, 'inches'))
 ```
 Refine the predicions based on that evaluation. A very simple fix is to eliminate the negative predictions. However, it might be better to choose a different model
 
