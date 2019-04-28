@@ -54,11 +54,12 @@ Ihr kennt es hier in Frankfurt: In der ganzen Stadt stehen Leihfarräder herum u
 **Explorative Datenanalyse – Lerne den Datensatz kennen**  
 
 Als ersten Schritt werden wir den Datansatz *deskriptiv* kennen lernen. Das heißt, wir nähern uns dem Ziel, indem wir die Daten *beschreiben*. Bei Data Science Projekten ist es sehr wichtig, sich zu aller erst mit dem Datansatz vertraut zu machen. Welche Variablen sind in dem Datensatz enthalten und wie stehen sie im Verhältnis zueinander? Diese Fragen kann man sich sehr gut mit Grafiken beantworten.  
-Wir stellen dir dafür eine Reihe von strukturierten Aufgaben, die du nacheinander bearbeiten wirst. 
+Wir stellen dir dafür eine Reihe von strukturierten Aufgaben, die du nacheinander bearbeiten wirst. Anfänger, die bisher noch keine oder sehr wenige Statistik-Kenntnisse haben, können an diesem Punkt aufhören. Jedoch wird es gerade danach spannend. Versuche dich also auf jeden Fall trotzdem daran, wenn du noch etwas dazu lernen willst.
 
 **Nachfrage-Prognose – Wende statistische Methoden an**  
 
-Nachdem wir den Datensatz kennen gelernt haben, können wir im nächsten Schritt ein Modell entwickeln, mit dem wir die Nachfrage nach Leihfahrrädern vorhersagen können. Ziel ist es, deine Vorhersage letztendlich bei Kaggle einzureichen. Kaggle ist eine Plattform von Google, die regelmäßig "Competitions" startet, bei denen es darum geht etwas besonders gut vorherzusagen. Du bekommst einen Trainings-Datensatz mit dem du deine Modelle trainierst. Danach wendest du dein Modell auf einen seperaten Test-Datensatz an. Kaggle überprüft dann die Genauigkeit deiner Vorhersagen und rankt deine Lösung danach.  
+Dieser Part ist vornehmlich für etwas Fortgeschrittenere Teilnehmer vorgesehen. Wenn du jedoch als Anfänger gut durch den ersten Abschnitt gekommen bist, empfehlen wir dir ausdrücklich, auch diesen Teil zu bearbeiten. Statistische Modelle sind ein enorm wichtiger Teil von Data Science.  
+Nachdem wir den Datensatz kennen gelernt haben, können wir in diesem Schritt ein Modell entwickeln, mit dem wir die Nachfrage nach Leihfahrrädern vorhersagen können. Ziel ist es, deine Vorhersage letztendlich bei Kaggle einzureichen. Kaggle ist eine Plattform von Google, die regelmäßig "Competitions" startet, bei denen es darum geht etwas besonders gut vorherzusagen. Du bekommst einen Trainings-Datensatz mit dem du deine Modelle trainierst. Danach wendest du dein Modell auf einen seperaten Test-Datensatz an. Kaggle überprüft dann die Genauigkeit deiner Vorhersagen und rankt deine Lösung danach.  
 
 # Explorative Datenanalyse – Lerne den Datensatz kennen
 
@@ -85,7 +86,7 @@ library(lubridate)
 train$datetime <- ymd_hms(train$datetime)
 ```
 
-Wie man sehen kann gibt es eine Zeile pro Stunde und die Variable $count$, die Anzahl der in dieser Stunde ausgeliehenen Räder. Ziel ist es jetzt die Variable $count$ über den Gesamtverlauf aller 10885 Beobachtungen zu plotten. Essentiell dafür ist das package $ggplot2$, von dem du auch schon in den DataCamp Kursen gehört hast. Damit kannst du alle möglichen Plots von einfachen Scatterplots über Boxplots und Histogramme bis hin zu fancy Grafiken wie Violin-Plots erstellen.  
+Wie man sehen kann gibt es eine Zeile pro Stunde und die Variable $count$, die Anzahl der in dieser Stunde ausgeliehenen Räder. Ziel ist es jetzt die Variable $count$ über den Gesamtverlauf aller 10885 Beobachtungen zu plotten. Essentiell dafür ist das package $ggplot2$, von dem du auch schon in den DataCamp Kursen gehört hast. Damit kannst du alle möglichen Plots von einfachen Scatterplots über Boxplots und Histogramme bis hin zu fancy Grafiken wie Violin-Plots erstellen. Starte für's Erste mit einem Scatterplot.  
   
 
 ```{r, results = 'hide', output = FALSE}
@@ -94,7 +95,7 @@ library(ggplot2)
 
 Kannst du daraus schon etwas ablesen?
 
-Vielleicht wäre es besser, einen beliebigen 7-Tage Zeitraum auszuwählen (Tipp: Starte bei bei der ersten Beobachtung) und nur diesen zu plotten. Was kann man beobachten? So in etwa könnte dein Plot aussehen:
+Wähle im nächsten Schritt einen beliebigen 7-Tage Zeitraum und visualisiere diesen in einem Lineplot (Tipp: Starte z.B. bei bei der ersten Beobachtung). Was kann man beobachten? So in etwa könnte dein Plot aussehen:
 
 ```{r demandplot seven day, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("Demand_Seven_day.png")
@@ -135,7 +136,7 @@ Schaue dir nun mit den schon bekannten Funktionen die Struktur des Datensatzes a
 In diesem Datensatz finden sich auch Angaben über die Mitgliedschaft der Kunden bei dem Bike Sharing Anbieter. $Member.type$ kann entweder $Member$ oder $Casual$ annehmen. Je nach Ausprägung dieser Variable ist der Kunde registriert oder nicht.
 Beschreibe die Ausleihzeiten je nach Art der Mitgliedschaft visuell.  
 Zum Beispiel kannst du dies in einem Density-Plot (siehe unten) darstellen. Probiere aber gerne wieder mehrere verschiedene Arten aus!  
-Tipp: in dem Datensatz befinden sich einige Ausreißer, die das plotten schwierig gestalten. Überlege dir einen geeigneten Weg, damit umzugehen – sonst ist es schwer, einen lesbaren Graph zu erstellen.
+Tipp: in dem Datensatz befinden sich einige Ausreißer, die das Plotten schwierig gestalten. Überlege dir einen geeigneten Weg, damit umzugehen – sonst ist es schwer, einen lesbaren Graph zu erstellen.
 
 ```{r densityduration, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("Density_Duration.png")
@@ -180,7 +181,7 @@ knitr::include_graphics("Map_Stations.png")
 
 Du kannst auch weiter gehen und zum Beispiel die einzelnen Fahrten einzeichnen. Oder sogar die Dichte der einzelnen Fahrten auf einer Heat-Map visualisieren.
 
-Herzlichen Glückwunsch – Du hast jetzt dank vieler Grafiken ein gutes Grundverständnis des Bike Sharing-Geschäfts. Damit hast du den ersten Teil des Projektes erfolgreich abgeschlossen! 
+Herzlichen Glückwunsch – Du hast jetzt dank vieler Grafiken ein gutes Grundverständnis des Bike Sharing-Geschäfts. Damit hast du den ersten Teil des Projektes erfolgreich abgeschlossen! Wenn du in der Anfänger-Gruppe bist, sind deine Mindestvoraussetzungen hiermit erfüllt. Wir empfehlen dir aber trotzdem dringend, dich auch mit dem folgenden Teil auseinanderzusetzen. Denn wir entwickeln jetzt Methoden, um die Zukunft vorauszusagen! Klingt spannend, oder?
 
 \clearpage
 # Nachfrage-Prognose – Wende statistische Methoden an
@@ -213,7 +214,7 @@ Oder du visualisierst die Korrelationen in einer Heat-Map, wie nachfolgend darge
 knitr::include_graphics("CorrPlot.png")
 ```
 
-Aus diesem Graph kannst du schon sehr viel heraus lesen. Scheinbar variiert die Nachfrage nach Fahrrädern sehr deutlich abhängig von der Tageszeit, sowie von der Temperatur.
+Aus diesem Graph kannst du schon sehr viel herauslesen. Scheinbar variiert die Nachfrage nach Fahrrädern sehr deutlich abhängig von der Tageszeit, sowie von der Temperatur.
 
 ## 2. Teste verschiedene Modelle und deren Qualität
 
@@ -303,7 +304,7 @@ Jetzt heißt es, dein favorisiertes Modell auf den Test-Datensatz anzuwenden. Da
 
 Im zweiten Schritt erstellst du dann einen neuen Datensatz, der sowohl die Datums-Variable als auch unsere Vorhersage enthält. Das klappt zum Beispiel mit der Funktion $data.frame()$. Ziel ist es, die Variable $count$ für den $test$ Datensatz mit dem Modell aus dem $train$ Datensatz vorherzusagen.
 
-Danach kannst du wieder einen Schritt zurück zum Visualisieren gehen. Überprüfe, ob die Vorhersagen valide sind. Mit einem Histogramm kannst du beispielsweise heraus finden, wie die Verteilung deiner Vorhersagen ist und ob unrealistische Werte vorhergesagt werden.
+Danach kannst du wieder einen Schritt zurück zum Visualisieren gehen. Überprüfe, ob die Vorhersagen valide sind. Mit einem Histogramm kannst du beispielsweise herausfinden, wie die Verteilung deiner Vorhersagen ist und ob unrealistische Werte vorhergesagt werden.
   
 ```{r Histogram2, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("Histogram2.png")
@@ -326,32 +327,14 @@ Zufrieden mit dem Ergebnis? Nein? Dann gehe noch einmal ein paar Schritte zurüc
 
 # Noch Fragen?
 
-Du kommst nicht weiter? Oder willst dein Modell noch weiter verbessern, weißt aber nicht genau wie? Oder dir fällt gerade nicht ein, wie man etwas bestimmtes im Code umsetzt? Folgende Ansätze werden dich weiter bringen.  
+Du kommst nicht weiter? Oder willst dein Modell noch weiter verbessern, weißt aber nicht genau wie? Oder dir fällt gerade nicht ein, wie man etwas bestimmtes im Code umsetzt? Schaue dir noch einmal unser Handout an. Dort findest du hilfreiche Hinweise, wie du in diesem Fall weiter verfahren und wo du nach einer Lösung für deine Fragestellung suchen kannst.
 
-## Cheat Sheets
-Eine sehr nützliche Ressource sind die *Cheat Sheets* von RStudio. Wenn du einmal einen bestimmten Code-Baustein nachschauen willst, helfen diese grafisch schön aufbereiteten Spickzettel oft weiter:  
-
-\begin{center} <https://www.rstudio.com/resources/cheatsheets/> \end{center}
-
-## StackOverflow und CrossValidated
-Ein großer Vorteil von R ist, dass die Programmiersprache open-source ist und eine sehr aktive Community existiert, die bei allen möglichen Fragen zur Verfügung steht. Falls du eine bestimmte Idee hast, aber nicht genau weißt wie du das umsetzen kannst wirst du sehr schnell durch googlen auf einen Lösungsweg gebracht. Meistens landest du dann auf einer Seite von *StackOverflow* für Fragen zu der Programmiersprache R
-
-\begin{center}<https://stackoverflow.com/> .\end{center}  
-
-Oder auf *CrossValidated*  
-
-\begin{center}<https://stats.stackexchange.com/> ,\end{center}
-
-der gleichen Seite für generelle Statistik-Fragestellungen. Dort beantworten Experten Fragen von Nutzern – und meistens wurde deine Frage schon einmal genau so oder leicht abgewandelt gestellt.
-
-## Spreche deine Mentoren an!
-Unsere Mentoren kennen sich gut in R aus und können dir wahrscheinlich oft einen guten Denkanstoß geben. Spreche sie gerne mit deinen Fragen an! Sei es über Slack oder im Rahmen der Coding Meetups.
 
 # Beschreibung der Variablen in den Datensätzen
 
 Wenn du dir einmal nicht sicher bist, welche Variable was aussagt, kannst du hier die Beschreibung nachschauen.  
 
-## Train
+## Train und Test
 
 $datetime$ - hourly date + timestamp  
 
