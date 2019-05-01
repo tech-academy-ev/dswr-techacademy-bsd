@@ -1,9 +1,6 @@
 ---
 title: "Data Science mit R – Bike Sharing Demand Projekt-Leitfaden"
-author:
-- Lukas Jürgensmeier
-- Benjamin Lucht
-- Joel Tecle
+author: "TechAcademy e.V."
 date: "Sommersemester 2019"
 output:
   pdf_document:
@@ -44,7 +41,7 @@ Herzlich willkommen in dem Projekt-Leitfaden für dein TechAcademy *Data Science
 
 Diese Kurzbeschreibung des Projektes soll dir erste Anhaltspunkte dafür geben, wie du zu einem Ergebnis kommst. Dieses Dokument ist jedoch bewusst keine Schritt-für-Schritt Anleitung, wie du das Projekt durchführen sollst. Uns ist es wichtig, dass du dich in deinem Team selbst mit der Aufgabenstellung beschäftigst und eigene Wege findest, wie du zu einem Ergebnis kommst.  
 
-Da es aber besonders am Anfang nicht ganz offensichtlich sein kann, welche Schritte du durchlaufen sollst, geben wir dir mit diesem Dokument eine kleine Hilfestellung. Es wird sehr oft vorkommen, dass du nicht weiter weißt. Das ist ganz normal und gehört zu dem Lernprozess dazu. Du findest in unserem Handout Links zu sehr nützlichen Websites, wo Deine Frage vermutlich schon einmal beantwortet wurde. Falls auch googlen dich nicht weiter bringt, stehen dir natürlich die Mentoren per Slack und bei unseren Coding Meetups persönlich zur Verfügung.
+Da es aber besonders am Anfang nicht ganz offensichtlich sein kann, welche Schritte du durchlaufen sollst, geben wir dir mit diesem Dokument eine kleine Hilfestellung. Es wird sehr oft vorkommen, dass du nicht weiter weißt. Das ist ganz normal und gehört zu dem Lernprozess dazu. Du findest in unserem Handbuch Links zu sehr nützlichen Websites, wo Deine Frage vermutlich schon einmal beantwortet wurde. Falls auch googlen dich nicht weiter bringt, stehen dir natürlich die Mentoren per Slack und bei unseren Coding Meetups persönlich zur Verfügung.
 
 # Bevor es los geht
 ## Um was geht das Projekt?
@@ -55,7 +52,7 @@ Ihr kennt es hier in Frankfurt: In der ganzen Stadt stehen Leihfarräder herum u
 **Explorative Datenanalyse – Lerne den Datensatz kennen**  
 
 Als ersten Schritt werden wir den Datansatz *deskriptiv* kennen lernen. Das heißt, wir nähern uns dem Ziel, indem wir die Daten *beschreiben*. Bei Data Science Projekten ist es sehr wichtig, sich zu aller erst mit dem Datansatz vertraut zu machen. Welche Variablen sind in dem Datensatz enthalten und wie stehen sie im Verhältnis zueinander? Diese Fragen kann man sich sehr gut mit Grafiken beantworten.  
-Wir stellen dir dafür eine Reihe von strukturierten Aufgaben, die du nacheinander bearbeiten wirst. Anfänger, die bisher noch keine oder sehr wenige Statistik-Kenntnisse haben, können nach diesen Aufgaben aufhören. Jedoch wird es gerade danach spannend. Versuche dich also auf jeden Fall trotzdem daran, wenn du noch etwas dazu lernen willst.
+Wir stellen dir dafür eine Reihe von strukturierten Aufgaben, die du nacheinander bearbeiten wirst. Anfänger, die bisher noch keine oder sehr wenige Statistik-Kenntnisse haben, können nach diesen Aufgaben aufhören. Damit sind für Anfänger die Mindestvoraussetzungen erfüllt. Jedoch wird es gerade danach spannend. Versuche dich also auf jeden Fall trotzdem daran, wenn du noch etwas dazu lernen willst.
 
 Für diesen Abschnitt ist es sinnvoll, die ersten DataCamp Kurse in deinem Curriculum absolviert zu haben. Insbesondere folgende Kurse helfen dir weiter bei der Explorativen Datenanalyse:
 
@@ -363,7 +360,7 @@ Zufrieden mit dem Ergebnis? Nein? Dann gehe noch einmal ein paar Schritte zurüc
 
 # Noch Fragen?
 
-Du kommst nicht weiter? Oder willst dein Modell noch weiter verbessern, weißt aber nicht genau wie? Oder dir fällt gerade nicht ein, wie man etwas bestimmtes im Code umsetzt? Schaue dir noch einmal unser Handout an. Dort findest du hilfreiche Hinweise, wie du in diesem Fall weiter verfahren und wo du nach einer Lösung für deine Fragestellung suchen kannst.
+Du kommst nicht weiter? Oder willst dein Modell noch weiter verbessern, weißt aber nicht genau wie? Oder dir fällt gerade nicht ein, wie man etwas bestimmtes im Code umsetzt? Schaue dir noch einmal unser Handbuch an. Dort findest du hilfreiche Hinweise, wie du in diesem Fall weiter verfahren und wo du nach einer Lösung für deine Fragestellung suchen kannst.
 
 
 # Beschreibung der Variablen in den Datensätzen
