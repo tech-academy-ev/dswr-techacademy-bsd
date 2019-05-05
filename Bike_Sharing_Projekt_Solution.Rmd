@@ -1,10 +1,7 @@
 ---
 title:
 - "Data Science with R – Bike Sharing Demand – Solution Sketch"
-author: 
-- "Lukas Jürgensmeier"
-- "Benjamin Lucht"
-- "Joel Tecle"
+author: "TechAcademy e.V."
 date: "Sommersemester 2019"
 output:
   pdf_document:
@@ -42,7 +39,8 @@ editor_options:
 # What's this document about?
 Before we start, a few comments on this document.  
 This is one starting point for the Bike Sharing Project. I include all code for the plots from the project guideline ("Projektleitfaden"). Also, I included a very simple regression model for the Kaggle challange. This obviously predicts very poorly. The main focus is not on building the best possible model, but on getting the project up and running.  
-Refer to this document if the participants have technical (i.e. code-related) questions regarding the Exercises.
+Refer to this document if the participants have technical (i.e. code-related) questions regarding the Exercises.  
+If you have questions regarding this project, please contact Lukas Jürgensmeier at _lukas.juergensmeier@tech-academy.io_ or via TechAcademy's Slack channel at https://techacademyffm.slack.com.
 
 # Packages
 ```{r,  warning=FALSE, message=FALSE}
